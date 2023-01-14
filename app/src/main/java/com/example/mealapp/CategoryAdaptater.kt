@@ -3,6 +3,7 @@ package com.example.mealapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -21,9 +22,12 @@ class CategoryAdaptater(val categories: List<Category>): RecyclerView.Adapter<Ca
         return CategoryViewHolder(itemView)
     }
 
+
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.nameTextView.setText(categories.get(position).strCategory)
         Picasso.get().load(categories.get(position).strCategoryThumb).into(holder.imageView)
+        holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, android.R.anim.slide_in_left)
+
     }
 
     override fun getItemCount(): Int {

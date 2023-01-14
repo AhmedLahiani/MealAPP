@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.appcompat.widget.SearchView
+import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -19,6 +21,8 @@ class CategoryActivity : AppCompatActivity() {
     private lateinit var categoriesAdapter: CategoryAdaptater
 
     private lateinit var circularProgressIndicator: CircularProgressIndicator
+    private lateinit var searchView: SearchView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +43,7 @@ class CategoryActivity : AppCompatActivity() {
 
         client.newCall(request).enqueue(object : Callback {
 
+
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("OKHTTP", e.localizedMessage)
                 //circularProgressIndicator.visibility = View.GONE
@@ -54,6 +59,8 @@ class CategoryActivity : AppCompatActivity() {
                             categoriesAdapter = CategoryAdaptater(it1)
                             recyclerView.adapter = categoriesAdapter
                             recyclerView.layoutManager = LinearLayoutManager(applicationContext)
+                            recyclerView.itemAnimator = DefaultItemAnimator()
+
                         }
 
                     }
